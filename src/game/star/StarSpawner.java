@@ -1,5 +1,10 @@
-import java.util.ArrayList;
-import java.util.List;
+package game.star;
+
+import base.FrameCounter;
+import base.GameObject;
+import base.GameObjectManager;
+import game.star.Star;
+
 import java.util.Random;
 
 public class StarSpawner extends GameObject {

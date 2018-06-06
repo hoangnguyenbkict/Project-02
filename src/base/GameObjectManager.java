@@ -1,3 +1,7 @@
+package base;
+
+import game.player.Player;
+
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +14,7 @@ public class GameObjectManager {
     private List<GameObject> list;
     private List<GameObject> tempList;
 
-   private GameObjectManager() {
+    private GameObjectManager() {
         this.list = new ArrayList<>();
         this.tempList = new ArrayList<>();
     }
@@ -29,4 +33,11 @@ public class GameObjectManager {
         this.list.forEach(gameObject -> gameObject.render(graphics));
     }
 
+    public Player findPlayer(){
+        return (Player) this.list
+                .stream()
+                .filter(gameObject -> gameObject instanceof Player)
+                .findFirst()
+                .orElse(null);
+    }
 }

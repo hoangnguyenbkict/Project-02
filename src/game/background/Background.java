@@ -1,3 +1,9 @@
+package game.background;
+
+import base.GameObject;
+import renderer.BackgroundRenderer;
+import renderer.Renderer;
+
 import java.awt.*;
 
 public class Background extends GameObject {

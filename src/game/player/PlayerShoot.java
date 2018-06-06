@@ -1,12 +1,17 @@
-import java.util.ArrayList;
-import java.util.List;
+package game.player;
+
+import base.FrameCounter;
+import base.GameObjectManager;
+import base.Vector2D;
+import game.bullet.Bullet;
+import game.player.Player;
 
 public class PlayerShoot {
 
     private FrameCounter frameCounter;
 
     public PlayerShoot(){
-        this.frameCounter = new FrameCounter(20);
+        this.frameCounter = new FrameCounter(10);
     }
 
     public void run(Player player) {

@@ -1,5 +1,10 @@
-import java.util.ArrayList;
-import java.util.List;
+package game.enemy;
+
+import base.FrameCounter;
+import base.GameObjectManager;
+import base.Vector2D;
+import game.bullet.Bullet;
+import game.enemy.Enemy;
 
 
 public class EnemyShoot {

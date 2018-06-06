@@ -1,4 +1,11 @@
 
+import base.GameObjectManager;
+import game.enemy.EnemySpawner;
+import game.player.Player;
+import game.star.StarSpawner;
+import game.background.Background;
+import input.KeyboardInput;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -51,6 +58,7 @@ public class GameCanvas extends JPanel {
 
     public void runAll() {
        GameObjectManager.instance.runAll();
+       KeyboardInput.instance.reset();
     }
 }
 
