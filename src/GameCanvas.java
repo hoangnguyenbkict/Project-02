@@ -13,12 +13,9 @@ public class GameCanvas extends JPanel {
     Graphics graphics;
 
     Background background;
-    List<Star> stars;
     public Player player;
-    private Random random = new Random();
     private EnemySpawner enemySpawner = new EnemySpawner();
     private StarSpawner starSpawner = new StarSpawner();
-    private FrameCounter frameCounter = new FrameCounter(30);
 
     public GameCanvas() {
         this.setSize(1024, 600);
@@ -53,42 +50,12 @@ public class GameCanvas extends JPanel {
     }
 
     public void renderAll() {
-        this.background.render(this.graphics);
-
-        this.starSpawner.stars.forEach(star -> star.render(graphics));
-
-        this.player.render(this.graphics);
-
-        this.enemySpawner.enemies.forEach(enemy -> enemy.render(graphics));
-
+        GameObjectManager.instance.renderAll(this.graphics);
         this.repaint();
     }
 
     public void runAll() {
-        //this.createStar();
-        this.starSpawner.run();
-
-        this.enemySpawner.enemies.forEach(enemy -> {
-            Vector2D velocity = player.position
-                    .subtract(enemy.position)
-                    .normalize()
-                    .multiply(2.0f);
-            enemy.velocity.set(velocity);
-        });
-        this.enemySpawner.run();
-
-        this.player.run();
+       GameObjectManager.instance.runAll();
     }
-
-//    private void createStar() {
-//        if (this.frameCounter.run()) {
-//            Star star = new Star();
-//            star.position.set(1024, this.random.nextInt(600));
-//            star.velocity.set(-(this.random.nextInt(3) + 1), 0);
-//            this.stars.add(star);
-//            this.frameCounter.reset();
-//        }
-//
-//    }
 }
 
