@@ -8,17 +8,21 @@ public class GameObjectManager {
     public static GameObjectManager instance = new GameObjectManager(); // goi bien thong qua class ma khong phai khoi tao object
 
     private List<GameObject> list;
+    private List<GameObject> tempList;
 
    private GameObjectManager() {
         this.list = new ArrayList<>();
+        this.tempList = new ArrayList<>();
     }
 
     public void add(GameObject gameObject){
-        this.list.add(gameObject);
+        this.tempList.add(gameObject);
     }
 
     public void runAll(){
         this.list.forEach(gameObject -> gameObject.run());
+        this.list.addAll(this.tempList);
+        this.tempList.clear();
     }
 
     public void renderAll(Graphics graphics){

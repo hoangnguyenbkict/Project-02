@@ -1,21 +1,14 @@
-import javax.imageio.ImageIO;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
 
 public class GameCanvas extends JPanel {
     BufferedImage backBuffered;
     Graphics graphics;
 
-    Background background;
     public Player player;
-    private EnemySpawner enemySpawner = new EnemySpawner();
-    private StarSpawner starSpawner = new StarSpawner();
+
 
     public GameCanvas() {
         this.setSize(1024, 600);
@@ -31,16 +24,18 @@ public class GameCanvas extends JPanel {
     }
 
     private void setupCharacter() {
-        this.background = new Background();
+       GameObjectManager.instance.add(new Background());
 
         this.setupPlayer();
-
+        GameObjectManager.instance.add(new StarSpawner());
+        GameObjectManager.instance.add(new EnemySpawner());
     }
 
     private void setupPlayer() {
         this.player = new Player();
         this.player.position.set(500, 300);
         this.player.playerMove.velocity.set(4, 0);
+        GameObjectManager.instance.add(this.player);
     }
 
     @Override
