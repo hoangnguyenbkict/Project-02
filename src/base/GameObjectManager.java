@@ -3,8 +3,11 @@ package base;
 import game.bullet.Bullet;
 import game.enemy.Enemy;
 import game.player.Player;
+import game.player.PlayerMove;
 import physic.BoxCollider;
+import renderer.PolygonRenderer;
 
+import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -60,5 +63,11 @@ public class GameObjectManager {
                 })
                 .findFirst()
                 .orElse(null);
+        }
+    public Player checkCollision1(Enemy enemy){
+        return (Player) this.list.stream().filter(gameObject -> gameObject.isAlive).filter(gameObject -> gameObject instanceof Player).filter(gameObject ->{
+            BoxCollider other = ((Player) gameObject).boxCollider;
+            return enemy.boxCollider.checkCoxCollider(other);
+        }).findFirst().orElse(null);
     }
 }
