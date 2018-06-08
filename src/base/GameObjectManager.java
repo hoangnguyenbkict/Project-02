@@ -1,6 +1,9 @@
 package base;
 
+import game.bullet.Bullet;
+import game.enemy.Enemy;
 import game.player.Player;
+import physic.BoxCollider;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -24,19 +27,37 @@ public class GameObjectManager {
     }
 
     public void runAll(){
-        this.list.forEach(gameObject -> gameObject.run());
+        this.list.stream()
+                .filter(gameObject -> gameObject.isAlive)
+                .forEach(gameObject -> gameObject.run());
         this.list.addAll(this.tempList);
         this.tempList.clear();
     }
 
     public void renderAll(Graphics graphics){
-        this.list.forEach(gameObject -> gameObject.render(graphics));
+        this.list
+                .stream()
+                .filter(gameObject -> gameObject.isAlive)
+                .forEach(gameObject -> gameObject.render(graphics));
     }
 
     public Player findPlayer(){
         return (Player) this.list
                 .stream()
                 .filter(gameObject -> gameObject instanceof Player)
+                .findFirst()
+                .orElse(null);
+    }
+
+    public Enemy checkCollision(Bullet bullet){
+        return (Enemy) this.list
+                .stream()
+                .filter(gameObject -> gameObject.isAlive)
+                .filter(gameObject -> gameObject instanceof Enemy)
+                .filter(gameObject -> {
+                    BoxCollider other = ((Enemy) gameObject).boxCollider;
+                    return bullet.boxCollider.checkCoxCollider(other);
+                })
                 .findFirst()
                 .orElse(null);
     }

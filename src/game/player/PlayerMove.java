@@ -23,10 +23,10 @@ public class PlayerMove {
 
         Vector2D velocity = NORMAL.copy();
         if (KeyboardInput.instance.leftPressed) {
-            this.angle -= 5.0;
+            this.angle -= 10.0;
         }
         if (KeyboardInput.instance.rightPressed) {
-            this.angle += 5.0;
+            this.angle += 10.0;
         }
         if (KeyboardInput.instance.upPressed) {
             velocity = HIGH.copy();
