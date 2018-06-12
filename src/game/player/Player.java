@@ -10,7 +10,6 @@ import java.awt.*;
 public class Player extends GameObject {
     public PlayerMove playerMove;
     public PlayerShoot playerShoot;
-    private RunHitObject runHitObject;
 
     public Player() {
         this.position = new Vector2D();
