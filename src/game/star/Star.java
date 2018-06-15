@@ -11,7 +11,7 @@ public class Star extends GameObject {
     public Star() {
 
         this.velocity = new Vector2D();
-        this.renderer = new ImageRenderer("resources/images/star.png", 5, 5);
+        this.renderer = new ImageRenderer("resources/images/star.png", 5, 5,Color.BLUE);
     }
 
     @Override

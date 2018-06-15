@@ -11,6 +11,7 @@ import game.effect.Shield;
 import game.effect.Smoke;
 import game.effect.TripleShootEffect;
 import game.enemy.Enemy;
+import game.enemy.EnemyShoot;
 import physic.BoxCollider;
 import physic.PhysicBody;
 import physic.RunHitObject;
@@ -26,6 +27,7 @@ public class Player extends GameObject implements PhysicBody {
     private int count;
     private FrameCounter frameCounter;
     public CreatSmoke creatSmoke;
+    public EnemyShoot enemyShoot;
 
     public Player() {
         this.renderer = new PolygonRenderer(
@@ -45,6 +47,7 @@ public class Player extends GameObject implements PhysicBody {
         this.count = 0;
         this.frameCounter = new FrameCounter(20);
         this.creatSmoke = new CreatSmoke();
+        this.enemyShoot = new EnemyShoot();
     }
 
     @Override
@@ -54,7 +57,7 @@ public class Player extends GameObject implements PhysicBody {
         this.playerMove.run(this);
         this.playerShoot.run(this);
         this.runHitObject.run(this);
-        this.creatSmoke.run();
+        this.creatSmoke.run(this);
         ((PolygonRenderer) this.renderer).angle = this.playerMove.angle;
     }
 
@@ -67,6 +70,7 @@ public class Player extends GameObject implements PhysicBody {
     public void getHit(GameObject gameObject) {
         if(gameObject instanceof Enemy) {
             if(this.count == 0){
+                this.enemyShoot.run(this);
                 isAlive = false;
             }else{
                 this.count -= 1;
@@ -90,17 +94,4 @@ public class Player extends GameObject implements PhysicBody {
             }
         }
     }
-//    private void creatSmoke(){
-//        if(this.frameCounter.run()){
-//           Smoke smoke = GameObjectManager.instance.recycle(Smoke.class);
-//            smoke.position.set(position);
-//
-//            Vector2D rotate = this.playerMove.velocity.add(
-//                    (new Vector2D(5, 0)).rotate(this.playerMove.angle));
-//
-//            smoke.velocity.set(rotate);
-//            this.frameCounter.reset();
-//        }
-//    }
-
 }

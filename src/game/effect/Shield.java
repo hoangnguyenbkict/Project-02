@@ -7,13 +7,15 @@ import physic.PhysicBody;
 import physic.RunHitObject;
 import renderer.ImageRenderer;
 
+import java.awt.*;
+
 public class Shield extends GameObject implements PhysicBody {
 
     public BoxCollider boxCollider;
     private RunHitObject runHitObject;
 
     public Shield() {
-        this.renderer = new ImageRenderer("resources/images/powerup_shield.png",20,20);
+        this.renderer = new ImageRenderer("resources/images/powerup_shield.png",20,20,Color.ORANGE);
         this.boxCollider = new BoxCollider(20,20);
         this.runHitObject = new RunHitObject(
                 Player.class

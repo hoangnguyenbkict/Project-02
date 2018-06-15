@@ -14,7 +14,7 @@ public class PlayerShoot {
     public TripleShoot tripleShoot;
 
     public PlayerShoot() {
-        this.frameCounter = new FrameCounter(5);
+        this.frameCounter = new FrameCounter(3);
         this.frameCounterSingleShoot = new FrameCounter(100);
         this.tripleShoot = new TripleShoot();
         this.shoot = new SingleShoot();

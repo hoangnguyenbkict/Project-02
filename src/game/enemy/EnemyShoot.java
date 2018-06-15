@@ -1,29 +1,31 @@
 package game.enemy;
 
-import base.FrameCounter;
+import base.GameObject;
 import base.GameObjectManager;
 import base.Vector2D;
 import game.bullet.Bullet;
-import game.enemy.Enemy;
+import game.player.Player;
+
+import java.util.Random;
 
 
-public class EnemyShoot {
-   private FrameCounter frameCounter;
+public class EnemyShoot extends GameObject {
+
+    private Random random;
 
     public EnemyShoot() {
-       this.frameCounter = new FrameCounter(50);
+        this.random = new Random();
     }
 
-    public void run(Enemy enemy) {
-        // create bullet
-        if (this.frameCounter.run()) {
+    public void run(Player enemy) {
+        for(int i = 1; i < 10; i++){
             for (double angle = 0.0; angle <= 360.0; angle += 15.0) {
                 Bullet bulletEnemy = new Bullet();
                 bulletEnemy.position.set(enemy.position);
-                bulletEnemy.velocity.set((new Vector2D(3, 0)).rotate(angle));
+                bulletEnemy.velocity.set(
+                        (new Vector2D(this.random.nextInt(2*i), 0)).rotate(angle));
                 GameObjectManager.instance.add(bulletEnemy);
             }
-            this.frameCounter.reset();
         }
     }
 }

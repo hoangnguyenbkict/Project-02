@@ -8,13 +8,15 @@ import physic.PhysicBody;
 import physic.RunHitObject;
 import renderer.ImageRenderer;
 
+import java.awt.*;
+
 public class TripleShootEffect extends GameObject implements PhysicBody {
 
     public BoxCollider boxCollider;
     private RunHitObject runHitObject;
 
     public TripleShootEffect() {
-        this.renderer = new ImageRenderer("resources/images/powerup_triple_shot.png",20,20);
+        this.renderer = new ImageRenderer("resources/images/powerup_triple_shot.png",20,20,Color.YELLOW);
         this.boxCollider = new BoxCollider(20,20);
         this.runHitObject = new RunHitObject(
                 Player.class
