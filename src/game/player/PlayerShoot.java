@@ -8,24 +8,27 @@ import input.KeyboardInput;
 
 public class PlayerShoot {
 
-    private FrameCounter frameCounter;
+    private FrameCounter frameCounter, frameCounterSingleShoot;
+    public Shoot shoot;
+    public SingleShoot singleShoot;
+    public TripleShoot tripleShoot;
 
-    public PlayerShoot(){
-        this.frameCounter = new FrameCounter(0);
+    public PlayerShoot() {
+        this.frameCounter = new FrameCounter(5);
+        this.frameCounterSingleShoot = new FrameCounter(100);
+        this.tripleShoot = new TripleShoot();
+        this.shoot = new SingleShoot();
     }
 
     public void run(Player player) {
-        if(KeyboardInput.instance.spacePressed){
-        if (this.frameCounter.run()) {
-            Bullet bulletPlayer = new Bullet();
-            bulletPlayer.position.set(player.position);
-
-            Vector2D rotate = player.playerMove.velocity.add(
-                    (new Vector2D(5, 0)).rotate(player.playerMove.angle));
-
-            bulletPlayer.velocity.set(rotate);
-            GameObjectManager.instance.add(bulletPlayer);
-            frameCounter.reset();
+        if (KeyboardInput.instance.spacePressed) {
+            if (this.frameCounter.run()) {
+                this.shoot.shoot(player);
+                this.frameCounter.reset();
+            }
+            if(this.frameCounterSingleShoot.run()){
+                this.shoot = new SingleShoot();
+                this.frameCounterSingleShoot.reset();
             }
         }
     }

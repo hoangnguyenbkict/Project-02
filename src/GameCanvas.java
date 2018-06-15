@@ -1,5 +1,7 @@
 
 import base.GameObjectManager;
+import game.effect.ShieldSpawner;
+import game.effect.TripleShootSpawner;
 import game.enemy.EnemySpawner;
 import game.player.Player;
 import game.star.StarSpawner;
@@ -34,7 +36,9 @@ public class GameCanvas extends JPanel {
        GameObjectManager.instance.add(new Background());
 
         this.setupPlayer();
+        GameObjectManager.instance.add(new ShieldSpawner());
         GameObjectManager.instance.add(new StarSpawner());
+        GameObjectManager.instance.add(new TripleShootSpawner());
         GameObjectManager.instance.add(new EnemySpawner());
     }
 

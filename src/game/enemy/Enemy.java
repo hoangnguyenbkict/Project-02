@@ -33,7 +33,7 @@ public class Enemy extends GameObject implements PhysicBody {
                     player.position
                             .subtract(this.position)
                             .normalize()
-                            .multiply(2.0f)
+                            .multiply(1.0f)
             );
         }
     }
