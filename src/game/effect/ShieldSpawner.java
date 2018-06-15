@@ -18,7 +18,7 @@ public class ShieldSpawner extends GameObject {
     public void run(){
         if(this.frameCounterShield.run()){
             Shield shield = GameObjectManager.instance.recycle(Shield.class);
-            shield.position.set(this.random.nextInt(1024), this.random.nextInt(600));
+            shield.position.set(this.random.nextInt(1024), this.random.nextInt(600 ));
             GameObjectManager.instance.add(shield);
             this.frameCounterShield.reset();
         }

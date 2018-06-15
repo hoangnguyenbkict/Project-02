@@ -1,8 +1,14 @@
 package game.player;
 
+import base.FrameCounter;
 import base.GameObject;
+import base.GameObjectManager;
 import base.Vector2D;
+import game.bullet.Bullet;
+
+import game.effect.CreatSmoke;
 import game.effect.Shield;
+import game.effect.Smoke;
 import game.effect.TripleShootEffect;
 import game.enemy.Enemy;
 import physic.BoxCollider;
@@ -18,9 +24,10 @@ public class Player extends GameObject implements PhysicBody {
     public BoxCollider boxCollider;
     private RunHitObject runHitObject;
     private int count;
+    private FrameCounter frameCounter;
+    public CreatSmoke creatSmoke;
 
     public Player() {
-        this.position = new Vector2D();
         this.renderer = new PolygonRenderer(
                 Color.RED,
                 new Vector2D(),
@@ -36,6 +43,8 @@ public class Player extends GameObject implements PhysicBody {
                 TripleShootEffect.class
         );
         this.count = 0;
+        this.frameCounter = new FrameCounter(20);
+        this.creatSmoke = new CreatSmoke();
     }
 
     @Override
@@ -45,6 +54,7 @@ public class Player extends GameObject implements PhysicBody {
         this.playerMove.run(this);
         this.playerShoot.run(this);
         this.runHitObject.run(this);
+        this.creatSmoke.run();
         ((PolygonRenderer) this.renderer).angle = this.playerMove.angle;
     }
 
@@ -80,5 +90,17 @@ public class Player extends GameObject implements PhysicBody {
             }
         }
     }
+//    private void creatSmoke(){
+//        if(this.frameCounter.run()){
+//           Smoke smoke = GameObjectManager.instance.recycle(Smoke.class);
+//            smoke.position.set(position);
+//
+//            Vector2D rotate = this.playerMove.velocity.add(
+//                    (new Vector2D(5, 0)).rotate(this.playerMove.angle));
+//
+//            smoke.velocity.set(rotate);
+//            this.frameCounter.reset();
+//        }
+//    }
 
 }
