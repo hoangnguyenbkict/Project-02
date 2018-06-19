@@ -3,18 +3,23 @@ package game.enemy;
 import base.GameObject;
 import base.GameObjectManager;
 import base.Vector2D;
+//import game.effect.CreatExplosion;
+import game.effect.CreatExplosion;
+import game.effect.Explosion;
 import game.player.Player;
 import physic.BoxCollider;
 import physic.PhysicBody;
 import renderer.ImageRenderer;
 
 import java.awt.*;
+import java.util.Random;
 
 public class Enemy extends GameObject implements PhysicBody {
 
     public Vector2D velocity;
     public BoxCollider boxCollider;
     private EnemyShoot enemyShoot;
+    private Random random;
 
     public Enemy() {
         this.velocity = new Vector2D();
@@ -40,8 +45,25 @@ public class Enemy extends GameObject implements PhysicBody {
         }
     }
 
+    public void creatExplosion(){
+        for(double angle1 = 0.0; angle1 <= 360; angle1 += 23) {
+            this.random = new Random();
+            for (double angle = 0.0; angle <= 360.0; angle += random.nextInt(30)+30) {
+                Explosion explosion = GameObjectManager.instance.recycle(Explosion.class);
+                explosion.renderer = new ImageRenderer("resources/images/star.png", 12, 12, Color.CYAN);
+                explosion.position.set(this.position);
+                this.random = new Random();
+                explosion.velocity.set((new Vector2D(this.random.nextInt(4)+1, 0)).rotate(angle));
+                explosion.run();
+
+            }
+        }
+
+    }
+
     @Override
     public void getHit(GameObject gameObject){
+        creatExplosion();
         this.isAlive = false;
     }
 

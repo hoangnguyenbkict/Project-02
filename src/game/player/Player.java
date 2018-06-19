@@ -6,18 +6,17 @@ import base.GameObjectManager;
 import base.Vector2D;
 import game.bullet.Bullet;
 
-import game.effect.CreatSmoke;
-import game.effect.Shield;
-import game.effect.Smoke;
-import game.effect.TripleShootEffect;
+import game.effect.*;
 import game.enemy.Enemy;
 import game.enemy.EnemyShoot;
 import physic.BoxCollider;
 import physic.PhysicBody;
 import physic.RunHitObject;
+import renderer.ImageRenderer;
 import renderer.PolygonRenderer;
 
 import java.awt.*;
+import java.util.Random;
 
 public class Player extends GameObject implements PhysicBody {
     public PlayerMove playerMove;
@@ -28,6 +27,8 @@ public class Player extends GameObject implements PhysicBody {
     private FrameCounter frameCounter;
     public CreatSmoke creatSmoke;
     public EnemyShoot enemyShoot;
+    public Random random;
+//    public CreatExplosion creatExplosion;
 
     public Player() {
         this.renderer = new PolygonRenderer(
@@ -48,6 +49,7 @@ public class Player extends GameObject implements PhysicBody {
         this.frameCounter = new FrameCounter(20);
         this.creatSmoke = new CreatSmoke();
         this.enemyShoot = new EnemyShoot();
+//        this.creatExplosion = new CreatExplosion();
     }
 
     @Override
@@ -70,7 +72,6 @@ public class Player extends GameObject implements PhysicBody {
     public void getHit(GameObject gameObject) {
         if(gameObject instanceof Enemy) {
             if(this.count == 0){
-                this.enemyShoot.run(this);
                 isAlive = false;
             }else{
                 this.count -= 1;
@@ -83,6 +84,7 @@ public class Player extends GameObject implements PhysicBody {
             this.playerShoot.shoot = new TripleShoot();
         }
     }
+
 
     @Override
     public void render(Graphics graphics){
