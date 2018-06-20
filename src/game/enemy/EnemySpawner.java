@@ -4,11 +4,11 @@ import action.ActionAdapter;
 import action.LimitAction;
 import action.SequenceAction;
 import action.WaitAction;
-import base.FrameCounter;
 import base.GameObject;
 import base.GameObjectManager;
-import game.enemy.Enemy;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class EnemySpawner extends GameObject {
@@ -17,7 +17,8 @@ public class EnemySpawner extends GameObject {
 
     public EnemySpawner() {
         this.random = new Random();
-        this.creatAction();
+       // this.creatAction();
+        this.creatAction2();
     }
 
     public void creatAction(){
@@ -38,6 +39,34 @@ public class EnemySpawner extends GameObject {
                        70
                )
        );
+    }
+
+    public void creatAction2(){
+        this.addAction(
+                new SequenceAction(
+                        new WaitAction(30),
+                        new ActionAdapter(){
+
+                            private List<Enemy> list = new ArrayList<>();
+                            private int count = 0;
+
+                            @Override
+                            public boolean run(GameObject owner) {
+                                if (list.isEmpty()) {
+                                    // frame
+                                    Enemy enemy = GameObjectManager.instance.recycle(Enemy.class);
+                                    enemy.position.set(random.nextInt(1024), random.nextInt(600));
+                                    this.count += 1;
+                                    list.add(enemy);
+                                }
+
+                                list.removeIf(enemy -> !enemy.isAlive);
+
+                                return this.count == 5;
+                            }
+                        }
+                )
+        );
     }
 
 //    public void creatEnemyShoot(){

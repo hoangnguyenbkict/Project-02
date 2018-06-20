@@ -14,6 +14,8 @@ import physic.PhysicBody;
 import physic.RunHitObject;
 import renderer.ImageRenderer;
 import renderer.PolygonRenderer;
+import scene.GameOverScene;
+import scene.SceneManager;
 
 import java.awt.*;
 import java.util.Random;
@@ -73,6 +75,8 @@ public class Player extends GameObject implements PhysicBody {
         if(gameObject instanceof Enemy) {
             if(this.count == 0){
                 isAlive = false;
+
+                SceneManager.instance.changeScene(new GameOverScene());
             }else{
                 this.count -= 1;
             }

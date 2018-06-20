@@ -96,4 +96,10 @@ public class GameObjectManager {
         }
     return object;
     }
+
+    public void clear(){
+        this.list.clear();
+        this.tempList.clear();
+    }
+
 }
