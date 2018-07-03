@@ -4,6 +4,7 @@ import base.FrameCounter;
 import base.GameObject;
 import base.GameObjectManager;
 import base.Vector2D;
+import constant.Constant;
 import game.bullet.Bullet;
 
 import game.effect.*;
@@ -30,14 +31,12 @@ public class Player extends GameObject implements PhysicBody {
     public CreatSmoke creatSmoke;
     public EnemyShoot enemyShoot;
     public Random random;
-//    public CreatExplosion creatExplosion;
+   public CreatExplosion creatExplosion;
 
     public Player() {
         this.renderer = new PolygonRenderer(
                 Color.RED,
-                new Vector2D(),
-                new Vector2D(0, 16),
-                new Vector2D(20, 8)
+                Constant.Player.VERTICES
         );
         this.playerMove = new PlayerMove();
         this.playerShoot = new PlayerShoot();
@@ -51,7 +50,7 @@ public class Player extends GameObject implements PhysicBody {
         this.frameCounter = new FrameCounter(20);
         this.creatSmoke = new CreatSmoke();
         this.enemyShoot = new EnemyShoot();
-//        this.creatExplosion = new CreatExplosion();
+       this.creatExplosion = new CreatExplosion();
     }
 
     @Override
@@ -75,8 +74,8 @@ public class Player extends GameObject implements PhysicBody {
         if(gameObject instanceof Enemy) {
             if(this.count == 0){
                 isAlive = false;
-
-                SceneManager.instance.changeScene(new GameOverScene());
+                this.creatExplosion.run();
+                //SceneManager.instance.changeScene(new GameOverScene());
             }else{
                 this.count -= 1;
             }

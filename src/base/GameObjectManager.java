@@ -74,7 +74,7 @@ public class GameObjectManager {
                 .filter(gameObject -> gameObject instanceof PhysicBody)
                 .filter(gameObject -> {
                     BoxCollider other = ((PhysicBody) gameObject).getBoxCollider();
-                    return boxCollider.checkCoxCollider(other);
+                    return boxCollider.checkBoxCollider(other);
                 })
                 .findFirst()
                 .orElse(null);

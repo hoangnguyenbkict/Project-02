@@ -1,3 +1,4 @@
+import constant.Constant;
 import input.KeyboardInput;
 import input.MouseInput;
 
@@ -10,8 +11,9 @@ public class GameWindow extends JFrame {
     GameCanvas gameCanvas;
     public long lastTime = 0;
 
+
     public GameWindow() {
-        this.setSize(1024, 600); // set size window
+        this.setSize(Constant.Window.WIDTH, Constant.Window.HEIGHT); // set size window
 
         this.setupGameCanvas();
         this.event();
